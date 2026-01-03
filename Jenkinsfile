@@ -1,10 +1,10 @@
 def branch = env.BRANCH_NAME
 def build = env.BUILD_NUMBER
 def DEBUG = true
-def appname ="helloworld-yan"
+def appname ="helloworld"
 def DEPLOY = false
 def artifactory = "docker.io" 
-def repo = "Pype77" 
+def repo = "elevy99927" 
 def appimage = "${artifactory}/${repo}/${appname}"
 def apptag = "${build}"
 
@@ -23,7 +23,7 @@ echo "----------  master   -------"
 
 podTemplate(containers: [
       containerTemplate(name: 'jnlp', image: 'jenkins/inbound-agent', ttyEnabled: true),
-      containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug-v0.19.0', command: "", ttyEnabled: true)
+      containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug-v0.19.0', command: "/busybox/cat", ttyEnabled: true)
   ],
   volumes: [
      configMapVolume(mountPath: '/kaniko/.docker/', configMapName: 'docker-cred')
@@ -39,11 +39,7 @@ podTemplate(containers: [
         stage('build') {
             container('kaniko') {
               echo "Building docker image with kaniko..."
-
-				echo 'Running in container: $(hostname)'
-
-				
-              sh "/kaniko/executor --dockerfile=Dockerfile --context=\$(pwd) --destination=${appimage}:${apptag}"
+              sh "/kaniko/executor --dockerfile=Dockerfile --context=dir:/. --destination=${appimage}:${apptag}"
             }
         } //end build
 
