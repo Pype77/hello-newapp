@@ -39,7 +39,7 @@ podTemplate(containers: [
         stage('build') {
             container('kaniko') {
               echo "Building docker image with kaniko..."
-              sh "/kaniko/executor --dockerfile=Dockerfile --context=dir://. --destination=${appimage}:${apptag}"
+              sh "/kaniko/executor --dockerfile=Dockerfile --context=\$(pwd) --destination=${appimage}:${apptag}"
             }
         } //end build
 
