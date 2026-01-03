@@ -4,7 +4,7 @@ def DEBUG = true
 def appname ="helloworld"
 def DEPLOY = false
 def artifactory = "docker.io" 
-def repo = "pype77" 
+def repo = "yanvin/devops" 
 def appimage = "${artifactory}/${repo}/${appname}"
 def apptag = "${build}"
 
