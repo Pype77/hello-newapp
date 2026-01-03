@@ -40,7 +40,7 @@ podTemplate(containers: [
             container('kaniko') {
               echo "Building docker image with kaniko..."
 
-				sh "echo 'Running in container: $(hostname)'"
+				echo 'Running in container: $(hostname)'
 
 				
               sh "/kaniko/executor --dockerfile=Dockerfile --context=\$(pwd) --destination=${appimage}:${apptag}"
