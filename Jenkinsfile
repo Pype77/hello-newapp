@@ -40,7 +40,7 @@ podTemplate(containers: [
             container('kaniko') {
 				withEnv(['PATH=/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/kaniko:/busybox'])
               echo "Building docker image with kaniko..."
-              sh "/kaniko/executor --dockerfile=Dockerfile --context=dir:/. --destination=${appimage}:${apptag}"
+              sh "/kaniko/executor --dockerfile=Dockerfile --context=dir://${WORKSPACE} --destination=${appimage}:${apptag}"
             }
         } //end build
 
