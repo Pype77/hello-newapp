@@ -40,13 +40,7 @@ podTemplate(containers: [
             container('kaniko') {
               echo "Building docker image with kaniko..."
 
-				sh "
-				    echo "Running in container: $(hostname)"
-				    echo "PID 1 process:"
-				    ps -p 1
-				    echo "Cgroup info:"
-				    cat /proc/1/cgroup
-				    "
+				sh "echo 'Running in container: $(hostname)'"
 
 				
               sh "/kaniko/executor --dockerfile=Dockerfile --context=\$(pwd) --destination=${appimage}:${apptag}"
