@@ -5,7 +5,7 @@ def appname ="helloworld"
 def DEPLOY = false
 def artifactory = "docker.io" 
 def repo = "yanvin/devops" 
-def appimage = "${artifactory}/${repo}/${appname}"
+def appimage = "${artifactory}/${repo}"
 def apptag = "${build}"
 
 def kubernetesurl = "https://kubernetes.default.svc"
